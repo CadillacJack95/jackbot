@@ -24,7 +24,7 @@ config.client.on("message", (channel, tags, message, self) => {
 
   //Many thanks to @whitep4nth3r for this
   const getCommandFromMessage = message.split(" ")[0];
-  const getRestOfMessage = message.toLowerCase().split(" ").slice(1);
+  const getRestOfMessage = message.split(" ").slice(1);
 
   commandController.GetCommandName(getCommandFromMessage, getRestOfMessage);
 });

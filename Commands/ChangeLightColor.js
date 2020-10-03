@@ -1,13 +1,14 @@
 require("dotenv").config();
 
+const axios = require("axios");
 const v3 = require("node-hue-api").v3;
 const discovery = v3.discovery;
-
-const colorTranslator = require("rgb");
+const namedColors = require("color-name-list");
+const hexRgb = require("hex-rgb");
 
 const LightState = v3.lightStates.LightState;
 
-async function changeLightColor(color) {
+async function changeLightColor(chosenColor) {
   const lightID = [5, 6, 7, 8, 10, 12, 13];
 
   try {
@@ -19,16 +20,15 @@ async function changeLightColor(color) {
         .connect(process.env.HUE_USERNAME);
 
       if (api) {
-        const chosenColor = colorTranslator(color);
-        const testString = chosenColor.split("(");
-        const finalString = testString[1].split(",");
+        let foundColor = namedColors.find(
+          (color) => color.name === String(chosenColor)
+        );
+        const RGB = hexRgb(foundColor.hex);
 
-        const R = finalString[0];
-        const G = finalString[1];
-        const B = finalString[2].split(")");
-        console.log(B[0]);
-
-        const state = new LightState().on(true).brightness(100).rgb(R, G, B);
+        const state = new LightState()
+          .on(true)
+          .brightness(100)
+          .rgb(RGB.red, RGB.green, RGB.blue);
 
         lightID.map((light) => api.lights.setLightState(light, state));
       }
