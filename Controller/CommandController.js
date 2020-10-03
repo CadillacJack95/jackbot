@@ -6,12 +6,14 @@ function GetCommandName(command, args) {
   switch (command) {
     case "!light": {
       lights.changeLightColor(args);
+      break;
     }
     case "!help": {
       config.client.say(
         process.env.CHANNEL_NAME,
         "You can use !light <color>, !discord, !github & !twitter"
       );
+      break;
     }
   }
 }

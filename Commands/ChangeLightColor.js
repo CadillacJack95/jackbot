@@ -21,7 +21,9 @@ async function changeLightColor(chosenColor) {
 
       if (api) {
         let foundColor = namedColors.find(
-          (color) => color.name === String(chosenColor)
+          (color) =>
+            color.name.toLowerCase() ===
+            String(chosenColor.join(" ")).toLowerCase()
         );
         const RGB = hexRgb(foundColor.hex);
 
