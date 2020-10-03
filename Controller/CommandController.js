@@ -3,7 +3,7 @@ const lights = require("../Commands/ChangeLightColor");
 const config = require("../Utils/config");
 
 function GetCommandName(command, args) {
-  switch (command) {
+  switch (String(command).toLowerCase()) {
     case "!light": {
       lights.changeLightColor(args);
       break;
