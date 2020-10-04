@@ -10,6 +10,7 @@ const LightState = v3.lightStates.LightState;
 
 async function changeLightColor(chosenColor) {
   const lightID = [5, 6, 7, 8, 10, 12, 13];
+  const chosenColorName = String(chosenColor.join(" ").toLowerCase());
 
   try {
     const searchResults = await discovery.nupnpSearch();
@@ -19,7 +20,7 @@ async function changeLightColor(chosenColor) {
         .createLocal(host)
         .connect(process.env.HUE_USERNAME);
 
-      if (String(chosenColor.join(" ")).toLowerCase() === "black") {
+      if (chosenColorName === "black") {
         const offState = new LightState().off(true);
         return lightID.map((light) =>
           api.lights.setLightState(light, offState)
@@ -28,17 +29,13 @@ async function changeLightColor(chosenColor) {
 
       if (api) {
         let foundColor = namedColors.find(
-          (color) =>
-            color.name.toLowerCase() ===
-            String(chosenColor.join(" ")).toLowerCase()
+          (color) => color.name.toLowerCase() === chosenColorName
         );
 
         if (!foundColor) {
           config.client.say(
             process.env.CHANNEL_NAME,
-            `${chosenColor.join(
-              " "
-            )} does not exist. For a list of colors you can head to this link: https://codepen.io/meodai/full/VMpNdQ/`
+            `${chosenColorName} does not exist. For a list of colors you can head to this link: https://codepen.io/meodai/full/VMpNdQ/`
           );
           return;
         }

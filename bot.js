@@ -14,7 +14,7 @@ async function OnConnectHandler() {
     .createLocal("192.168.1.147")
     .connect(process.env.HUE_USERNAME);
 
-  config.client.say(process.env.CHANNEL_NAME, "I'm alive? PogChamp");
+  config.client.say(process.env.CHANNEL_NAME, "I'm at your service!");
 }
 
 config.client.on("connected", OnConnectHandler);
@@ -26,5 +26,9 @@ config.client.on("message", (channel, tags, message, self) => {
   const getCommandFromMessage = message.split(" ")[0];
   const getRestOfMessage = message.split(" ").slice(1);
 
-  commandController.GetCommandName(getCommandFromMessage, getRestOfMessage);
+  commandController.GetCommandName(
+    getCommandFromMessage,
+    getRestOfMessage,
+    tags
+  );
 });
