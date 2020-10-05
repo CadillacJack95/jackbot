@@ -9,7 +9,7 @@ const client = new tmi.Client({
   },
   identity: {
     username: process.env.JACKBOT_USERNAME,
-    password: `oauth:${process.env.JACKBOT_TOKEN}`,
+    password: process.env.JACKBOT_TOKEN,
   },
   channels: [process.env.CHANNEL_NAME],
 });

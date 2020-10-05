@@ -12,7 +12,7 @@ function SendHelp() {
 function Discord() {
   config.client.say(
     process.env.CHANNEL_NAME,
-    "Want to come hangout with me off stream? We have a discord server now! https://discord.gg/KY2XUM8"
+    "Want to come hangout with me off stream? We have a discord server now! https://discord.gg/2DbqPHq"
   );
 }
 

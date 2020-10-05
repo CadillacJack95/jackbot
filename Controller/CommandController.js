@@ -6,7 +6,7 @@ const config = require("../Utils/config");
 function GetCommandName(command, args, tags, userstate) {
   switch (String(command).toLowerCase()) {
     case "!light": {
-      lights.changeLightColor(args);
+      lights.changeLightColor(args, tags);
       break;
     }
     case "!help": {
